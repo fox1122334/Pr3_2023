@@ -1,12 +1,7 @@
-class Gras {
-    zeile;
-    spalte;
+class Gras extends LivingCreature{
     energie = 0;
 
-    constructor(z,s){
-        this.zeile = z
-        this.spalte = s
-    }
+ 
     inMatrixEinfügen(){
         matrix[this.zeile][this.spalte] = 1
     };
@@ -34,19 +29,7 @@ class Gras {
 
     };
 
-    erstelleErdeTabelle(){
-        let benachbarteFelder =[
-        [this.zeile+1,this.spalte],
-        [this.zeile-1,this.spalte],
-        [this.zeile,this.spalte+1],
-        [this.zeile,this.spalte-1],
-        [this.zeile+1,this.spalte+1],
-        [this.zeile-1,this.spalte-1],
-        [this.zeile-1,this.spalte+1],
-        [this.zeile+1,this.spalte-1]
-        ]
-        return benachbarteFelder.filter(this.istErde)
-    };
+    ;
 
     istErde(koordinatenPaar){
         let zeile = koordinatenPaar[0];

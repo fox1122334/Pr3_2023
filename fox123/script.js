@@ -1,6 +1,7 @@
 // Hauptscript
 let matrix = erstelleMatrix();
-let objektliste = [new Painter(20,20)];
+let objektliste = [new Grasfresser(20,20)];
+    //new Painter(20,20)];
 
 
 //Anzahl der random platzierten Objekten
