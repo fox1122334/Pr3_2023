@@ -14,7 +14,7 @@ let objektliste = [new Grasfresser(20,20)];
 function setup() {
     createCanvas(500, 500)
     background("lightgray")
-    frameRate (2)
+    frameRate (20)
     // gras in der Matrix auftauchen lassen
     for (let z = 0; z < objektliste.length; z = z+1){
         objektliste[z].inMatrixEinfügen()

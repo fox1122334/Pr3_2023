@@ -1,7 +1,6 @@
-class Gras extends LivingCreature{
+class Gras extends Lebewesen{
     energie = 0;
 
- 
     inMatrixEinfügen(){
         matrix[this.zeile][this.spalte] = 1
     };
@@ -28,22 +27,4 @@ class Gras extends LivingCreature{
         }
 
     };
-
-    ;
-
-    istErde(koordinatenPaar){
-        let zeile = koordinatenPaar[0];
-        let spalte = koordinatenPaar[1];
-        if (zeile >= 0
-            && spalte >= 0
-            && zeile < matrix.length
-            && spalte < matrix.length
-            && matrix[zeile][spalte] === 0
-            ) {
-                return true;
-
-            } else {
-                return false;
-            }
-        }
 }
