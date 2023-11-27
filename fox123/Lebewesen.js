@@ -2,100 +2,99 @@ class Lebewesen {
     zeile;
     spalte;
 
-    constructor(z,s){
+    constructor(z, s) {
         this.zeile = z
         this.spalte = s
     }
 
-    erstelleErdeTabelle(){
-        let benachbarteFelder =[
-        [this.zeile+1,this.spalte],
-        [this.zeile-1,this.spalte],
-        [this.zeile,this.spalte+1],
-        [this.zeile,this.spalte-1],
-        [this.zeile+1,this.spalte+1],
-        [this.zeile-1,this.spalte-1],
-        [this.zeile-1,this.spalte+1],
-        [this.zeile+1,this.spalte-1]
+    erstelleUmgebungsTabelle() {
+        let benachbarteFelder = [
+            [this.zeile + 1, this.spalte],
+            [this.zeile - 1, this.spalte],
+            [this.zeile, this.spalte + 1],
+            [this.zeile, this.spalte - 1],
+            [this.zeile + 1, this.spalte + 1],
+            [this.zeile - 1, this.spalte - 1],
+            [this.zeile - 1, this.spalte + 1],
+            [this.zeile + 1, this.spalte - 1]
         ]
-        return benachbarteFelder.filter(this.istErde)
+        return benachbarteFelder.filter(this.istWesen(1))
     };
 
-    istErde(koordinatenPaar){
+    istWesen(koordinatenPaar, feld) {
         let zeile = koordinatenPaar[0];
         let spalte = koordinatenPaar[1];
         if (zeile >= 0
             && spalte >= 0
             && zeile < matrix.length
             && spalte < matrix.length
-            && matrix[zeile][spalte] === 0
-            ) {
-                return true;
+            && matrix[zeile][spalte] === feld
+        ) {
+            return true;
 
-            } else {
-                return false;
-            }
+        } else {
+            return false;
         }
+    }
 
-    erstelleGrasTabelle(){
-        let benachbarteFelder =[
-        [this.zeile+1,this.spalte],
-        [this.zeile-1,this.spalte],
-        [this.zeile,this.spalte+1],
-        [this.zeile,this.spalte-1],
-        // Rasendestroyer auch quer bewegen
-        // [this.zeile+1,this.spalte+1],
-        // [this.zeile-1,this.spalte-1],
-        // [this.zeile-1,this.spalte+1],
-        // [this.zeile+1,this.spalte-1],
-        ]
-        return benachbarteFelder.filter(this.istGras)
-    };
+    // erstelleErdeTabelle() {
+    //     let benachbarteFelder = [
+    //         [this.zeile + 1, this.spalte],
+    //         [this.zeile - 1, this.spalte],
+    //         [this.zeile, this.spalte + 1],
+    //         [this.zeile, this.spalte - 1],
+    //         [this.zeile + 1, this.spalte + 1],
+    //         [this.zeile - 1, this.spalte - 1],
+    //         [this.zeile - 1, this.spalte + 1],
+    //         [this.zeile + 1, this.spalte - 1]
+    //     ]
+    //     return benachbarteFelder.filter(this.istFeld(1))
+    // };
 
-    istGras(koordinatenPaar){
-        let zeile = koordinatenPaar[0];
-        let spalte = koordinatenPaar[1];
-        if (zeile >= 0
-            && spalte >= 0
-            && zeile < matrix.length
-            && spalte < matrix.length
-            && matrix[zeile][spalte] === 1
-            ) {
-                return true;
+    // istErde(koordinatenPaar) {
+    //     let zeile = koordinatenPaar[0];
+    //     let spalte = koordinatenPaar[1];
+    //     if (zeile >= 0
+    //         && spalte >= 0
+    //         && zeile < matrix.length
+    //         && spalte < matrix.length
+    //         && matrix[zeile][spalte] === 0
+    //     ) {
+    //         return true;
 
-            } else {
-                return false;
-            }
-    };
-    
-    erstelleGrasTabelle(){
-        let benachbarteFelder =[
-        [this.zeile+1,this.spalte],
-        [this.zeile-1,this.spalte],
-        [this.zeile,this.spalte+1],
-        [this.zeile,this.spalte-1],
-        // Rasendestroyer auch quer bewegen
-        // [this.zeile+1,this.spalte+1],
-        // [this.zeile-1,this.spalte-1],
-        // [this.zeile-1,this.spalte+1],
-        // [this.zeile+1,this.spalte-1],
-        ]
-        return benachbarteFelder.filter(this.istGras)
-    };
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
-    istGras(koordinatenPaar){
-        let zeile = koordinatenPaar[0];
-        let spalte = koordinatenPaar[1];
-        if (zeile >= 0
-            && spalte >= 0
-            && zeile < matrix.length
-            && spalte < matrix.length
-            && matrix[zeile][spalte] === 1
-            ) {
-                return true;
+    // erstelleGrasTabelle() {
+    //     let benachbarteFelder = [
+    //         [this.zeile + 1, this.spalte],
+    //         [this.zeile - 1, this.spalte],
+    //         [this.zeile, this.spalte + 1],
+    //         [this.zeile, this.spalte - 1],
+    //         // Rasendestroyer auch quer bewegen
+    //         // [this.zeile+1,this.spalte+1],
+    //         // [this.zeile-1,this.spalte-1],
+    //         // [this.zeile-1,this.spalte+1],
+    //         // [this.zeile+1,this.spalte-1],
+    //     ]
+    //     return benachbarteFelder.filter(this.istGras)
+    // };
 
-            } else {
-                return false;
-            }
-    };
+    // istGras(koordinatenPaar) {
+    //     let zeile = koordinatenPaar[0];
+    //     let spalte = koordinatenPaar[1];
+    //     if (zeile >= 0
+    //         && spalte >= 0
+    //         && zeile < matrix.length
+    //         && spalte < matrix.length
+    //         && matrix[zeile][spalte] === 1
+    //     ) {
+    //         return true;
+
+    //     } else {
+    //         return false;
+    //     }
+    // };
 }

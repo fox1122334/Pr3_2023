@@ -41,7 +41,7 @@ class Grasfresser extends Lebewesen{
     };
 
     Schritt(){
-        let gras = this.erstelleGrasTabelle()
+        let gras = this.erstelleUmgebungsTabelle(this.istFeld(0))
         if (gras.length > 0){
             let gewähltesFeld = gras[Math.floor(random(0,gras.length))];
             matrix[this.zeile][this.spalte] = 0;

@@ -18,7 +18,7 @@ class Gras extends Lebewesen{
     };
 
     plantGras(){
-        let erdeFelder = this.erstelleErdeTabelle()
+        let erdeFelder = this.erstelleUmgebungsTabelle.filter(this.istWesen(1))
         if (erdeFelder.length > 0){
             let gewähltesFeld = erdeFelder[Math.floor(random(0,erdeFelder.length))];
              let newGras = new Gras(gewähltesFeld[0],gewähltesFeld[1]);
