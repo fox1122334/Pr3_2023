@@ -41,7 +41,7 @@ class Grasfresser extends Lebewesen{
     };
 
     Schritt(){
-        let gras = this.erstelleUmgebungsTabelle(this.istFeld(0))
+        let gras = this.erstelleUmgebungsTabelle(this.istWesen(0))
         if (gras.length > 0){
             let gewähltesFeld = gras[Math.floor(random(0,gras.length))];
             matrix[this.zeile][this.spalte] = 0;
@@ -65,4 +65,4 @@ class Grasfresser extends Lebewesen{
         })
          objektliste.splice(index,1)
     };
-}
+};

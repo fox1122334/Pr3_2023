@@ -1,29 +1,29 @@
-class Gras extends Lebewesen{
+class Gras extends Lebewesen {
     energie = 0;
 
-    inMatrixEinfügen(){
+    inMatrixEinfügen() {
         matrix[this.zeile][this.spalte] = 1
     };
 
-    spielzug(){
+    spielzug() {
         //Geschwindigkeit des Graswachstums
-        if (this.energie > 4){
+        if (this.energie > 4) {
             this.energie = 0
             this.plantGras();
             //mach etwas
-        }else {
+        } else {
             //schlaf
             this.energie++;
         }
     };
 
-    plantGras(){
+    plantGras() {
         let erdeFelder = this.erstelleUmgebungsTabelle.filter(this.istWesen(1))
-        if (erdeFelder.length > 0){
-            let gewähltesFeld = erdeFelder[Math.floor(random(0,erdeFelder.length))];
-             let newGras = new Gras(gewähltesFeld[0],gewähltesFeld[1]);
-             newGras.inMatrixEinfügen();
-             objektliste.push(newGras);
+        if (erdeFelder.length > 0) {
+            let gewähltesFeld = erdeFelder[Math.floor(random(0, erdeFelder.length))];
+            let newGras = new Gras(gewähltesFeld[0], gewähltesFeld[1]);
+            newGras.inMatrixEinfügen();
+            objektliste.push(newGras);
         }
 
     };
