@@ -1,130 +1,69 @@
-class Lebewesen {
-    zeile;
-    spalte;
-
-    constructor(z, s) {
+class Painter extends Lebewesen{
+    // zeile;
+    // spalte;
+    // Farbe = 250;
+    constructor(z,s){
         this.zeile = z
         this.spalte = s
-        this.benachbarteFelder = [
-            [this.zeile + 1, this.spalte],
-            [this.zeile - 1, this.spalte],
-            [this.zeile, this.spalte + 1],
-            [this.zeile, this.spalte - 1],
-            [this.zeile + 1, this.spalte + 1],
-            [this.zeile - 1, this.spalte - 1],
-            [this.zeile - 1, this.spalte + 1],
-            [this.zeile + 1, this.spalte - 1]
-        ]
-    }
-
-    erstelleUmgebungsTabelle(charakter) {
-        this.benachbarteFelder = [
-            [this.zeile + 1, this.spalte],
-            [this.zeile - 1, this.spalte],
-            [this.zeile, this.spalte + 1],
-            [this.zeile, this.spalte - 1],
-            [this.zeile + 1, this.spalte + 1],
-            [this.zeile - 1, this.spalte - 1],
-            [this.zeile - 1, this.spalte + 1],
-            [this.zeile + 1, this.spalte - 1]
-        ]
-        return this.benachbarteFelder.filter((koordinatenPaar) => this.istWesen(koordinatenPaar, charakter))
+        this.Farbe = 250
     };
 
-    istWesen(koordinatenPaar, charakter) {
-        let zeile = koordinatenPaar[0];
-        let spalte = koordinatenPaar[1];
-        if (zeile >= 0
-            && spalte >= 0
-            && zeile < matrix.length
-            && spalte < matrix.length
-            && matrix[zeile][spalte] === charakter
-        ) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
-    erstelleUmgebungsTabelleOhneWesen(charakter) {
-        return this.benachbarteFelder.filter((koordinatenPaar) => this.istNichtWesen(koordinatenPaar, charakter))
+    inMatrixEinfügen(){
+        matrix[this.zeile][this.spalte] = 4
     };
 
-    istNichtWesen(koordinatenPaar, charakter) {
-        let zeile = koordinatenPaar[0];
-        let spalte = koordinatenPaar[1];
-        if (zeile >= 0
-            && spalte >= 0
-            && zeile < matrix.length
-            && spalte < matrix.length
-            && matrix[zeile][spalte] !== charakter
-        ) {
-            return true;
-
-        } else {
-            return false;
+    spielzug(){
+        if (this.Farbe > 0){
+            this.Schritt()
+            this.Farbe--
+        } 
+        else {
+            //fertig
+            console.log ("Das Bild ist fertig!")
         }
-    }
+    };
 
-    // erstelleErdeTabelle() {
-    //     let benachbarteFelder = [
-    //         [this.zeile + 1, this.spalte],
-    //         [this.zeile - 1, this.spalte],
-    //         [this.zeile, this.spalte + 1],
-    //         [this.zeile, this.spalte - 1],
-    //         [this.zeile + 1, this.spalte + 1],
-    //         [this.zeile - 1, this.spalte - 1],
-    //         [this.zeile - 1, this.spalte + 1],
-    //         [this.zeile + 1, this.spalte - 1]
+    Schritt(){
+        // let Feld = this.erstelleFelderTabelle()
+        let Feld = this.erstelleUmgebungsTabelleOhneWesen(6)
+        if (Feld.length > 0){
+            let gewähltesFeld = Feld[Math.floor(random(0,Feld.length))];
+            matrix[this.zeile][this.spalte] = 5;
+            //für magischen Farbeimer = 6 zu = 5 ändern
+            this.zeile = gewähltesFeld[0];
+            this.spalte = gewähltesFeld[1];
+            matrix[this.zeile][this.spalte] = 4;
+        }
+        else this.Farbe = 0
+    };
+
+    // erstelleFelderTabelle(){
+    //     let benachbarteFelder =[
+    //     [this.zeile+1,this.spalte],
+    //     [this.zeile-1,this.spalte],
+    //     [this.zeile,this.spalte+1],
+    //     [this.zeile,this.spalte-1],
+    //     [this.zeile+1,this.spalte+1],
+    //     [this.zeile-1,this.spalte-1],
+    //     [this.zeile-1,this.spalte+1],
+    //     [this.zeile+1,this.spalte-1],
     //     ]
-    //     return benachbarteFelder.filter(this.istFeld(1))
+    //     return benachbarteFelder.filter(this.istfreiesFeld)
     // };
 
-    // istErde(koordinatenPaar) {
+    // istfreiesFeld(koordinatenPaar){
     //     let zeile = koordinatenPaar[0];
     //     let spalte = koordinatenPaar[1];
     //     if (zeile >= 0
     //         && spalte >= 0
     //         && zeile < matrix.length
     //         && spalte < matrix.length
-    //         && matrix[zeile][spalte] === 0
-    //     ) {
-    //         return true;
+    //         && matrix[zeile][spalte] !== 6
+    //         ) {
+    //             return true;
 
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // erstelleGrasTabelle() {
-    //     let benachbarteFelder = [
-    //         [this.zeile + 1, this.spalte],
-    //         [this.zeile - 1, this.spalte],
-    //         [this.zeile, this.spalte + 1],
-    //         [this.zeile, this.spalte - 1],
-    //         // Rasendestroyer auch quer bewegen
-    //         // [this.zeile+1,this.spalte+1],
-    //         // [this.zeile-1,this.spalte-1],
-    //         // [this.zeile-1,this.spalte+1],
-    //         // [this.zeile+1,this.spalte-1],
-    //     ]
-    //     return benachbarteFelder.filter(this.istGras)
-    // };
-
-    // istGras(koordinatenPaar) {
-    //     let zeile = koordinatenPaar[0];
-    //     let spalte = koordinatenPaar[1];
-    //     if (zeile >= 0
-    //         && spalte >= 0
-    //         && zeile < matrix.length
-    //         && spalte < matrix.length
-    //         && matrix[zeile][spalte] === 1
-    //     ) {
-    //         return true;
-
-    //     } else {
-    //         return false;
-    //     }
+    //         } else {
+    //             return false;
+    //         }
     // };
 }
