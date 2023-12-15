@@ -1,6 +1,11 @@
 class Grasfresser extends Lebewesen{
     energie = 15;
 
+    constructor(z, s){
+        super(z, s);
+        this.energie = 15;
+    }
+
     inMatrixEinfügen(){
         matrix[this.zeile][this.spalte] = 3
     };
@@ -13,7 +18,8 @@ class Grasfresser extends Lebewesen{
         }
         else if (this.energie > 0){
             this.Schritt()
-            let gras = this.erstelleGrasTabelle()
+            // let gras = this.erstelleGrasTabelle()
+            let gras = this.erstelleUmgebungsTabelle(0)
             if (gras.length > 0){
                 this.energie++
             }
@@ -29,7 +35,9 @@ class Grasfresser extends Lebewesen{
     };
 
     plantGrasfresser(){
-        let grasFelder = this.erstelleGrasTabelle()
+        
+        // let grasFelder = this.erstelleGrasTabelle()
+        let grasFelder = this.erstelleUmgebungsTabelle(0)
         if (grasFelder.length > 0){
             let gewähltesFeld = grasFelder[0];
             this.ObjektLöschen(gewähltesFeld[0],gewähltesFeld[1])
@@ -41,7 +49,7 @@ class Grasfresser extends Lebewesen{
     };
 
     Schritt(){
-        let gras = this.erstelleUmgebungsTabelle(this.istWesen(0))
+        let gras = this.erstelleUmgebungsTabelle(0)
         if (gras.length > 0){
             let gewähltesFeld = gras[Math.floor(random(0,gras.length))];
             matrix[this.zeile][this.spalte] = 0;

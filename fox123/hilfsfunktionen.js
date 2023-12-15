@@ -46,8 +46,3 @@ function erstelleMatrix(){
     }
     return matrix
 }
-
-
-
-
-

@@ -27,9 +27,8 @@ function draw() {
     for (let z = 0; z < objektliste.length; z = z+1){
         objektliste[z].spielzug()
     }
-    console.log(objektliste.length)
-    zeichneMatrix()
-    ;
+    // console.log(objektliste.length)
+    zeichneMatrix();
     
 
 };
