@@ -1,6 +1,5 @@
 let matrix = [];
-
-
+let side = 10;
 
 function main (){
     const socket = io();
@@ -8,17 +7,10 @@ function main (){
     console.log ("ready to display game ...")
     
     function gotMatrixData(data){
-        
+        console.log(data);
+        matrix = data;
     }
-
-
-
-
-
-
-
-
-
+    socket.on("matrix",gotMatrix)
 
 
 function setup(){
@@ -58,4 +50,4 @@ function zeichneMatrix() {
 
 }
 
-window.onload = main
+window.onload = main;
