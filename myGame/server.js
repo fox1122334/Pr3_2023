@@ -1,11 +1,13 @@
 const Grass = require("./classes/grass.js");
 const Grazer = require("./classes/grazer.js");
 const Predator = require("./classes/predator.js");
+//const functions = require("./classes/functions.js");
 
+///////// Server Setup ///////////
 const express = require("express");
 const app = express();
 
-app.use(express.static("./client"))
+app.use(express.static("./client/"))
 
 app.get("/", function (req, res) {
     res.redirect("index.html")
@@ -29,6 +31,7 @@ server.listen(3000, function () {
         if (clients.length == 1 && isGameRunning == false) {
             console.log("Starte Spiel... wenn noch nicht gestartet...")
             initGame()
+            //Spielschleife
             interVaLID = setInterval(updateGame, 3000);
             isGameRunning = true
         }
@@ -48,7 +51,8 @@ server.listen(3000, function () {
     })
 });
 
-// game logic on server
+
+///////// game logic on server ////////
 matrix = [
     [0, 0, 1, 0, 0],
     [1, 1, 0, 0, 0],
@@ -106,6 +110,8 @@ function initGame() {
             }
         }
     }
+    console.log("Sende matrix zu clients")
+    io.sockets.emit('matrix', matrix);
 }
 
 function updateGame() {
