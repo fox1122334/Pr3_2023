@@ -1,53 +1,57 @@
 let matrix = [];
-let side = 10;
+
 
 function main() {
     const socket = io();
 
+    let button = document.getElementById("button");
     console.log("ready to display game ...")
 
     function gotMatrixData(data) {
         console.log(data);
+        zeichneMatrix()
         matrix = data;
     }
     socket.on("matrix", gotMatrixData)
 
+    // button.onclick = setInterval(20000);
+}
 
-    function setup() {
-        createCanvas(500, 500);
-    }
+function setup() {
+    createCanvas(500, 500);
+}
 
-    // Matrix zeichnen
-    function zeichneMatrix() {
-        for (let z = 0; z < matrix.length; z++) {
-            for (let s = 0; s < matrix.length; s++) {
-                // console.log(matrix[z][s])
-                let r = randomNumber(0, 255)
-                let g = randomNumber(0, 255)
-                let b = randomNumber(0, 255)
-                if (matrix[z][s] === 0) {
-                    fill("#f2d491")
-                } else if (matrix[z][s] === 1) {
-                    fill("green")
-                } else if (matrix[z][s] === 2) {
-                    fill("darkgrey")
-                } else if (matrix[z][s] === 3) {
-                    fill("red")
-                } else if (matrix[z][s] === 4) {
-                    fill("white")
-                } else if (matrix[z][s] === 5) {
-                    fill(r, g, b)
-                } else if (matrix[z][s] === 6) {
-                    fill("turquoise")
-                } else {
-                    fill("black")
-                }
-                rect(s * (500 / matrix.length), z * (500 / matrix.length),
-                    (500 / matrix.length), (500 / matrix.length))
+// Matrix zeichnen
+function zeichneMatrix() {
+    console.log ("matrix zeichnen")
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix.length; x++) {
+            // console.log(matrix[y][x])
+            // let r = randomNumber(0, 255)
+            // let g = randomNumber(0, 255)
+            // let b = randomNumber(0, 255)
+            if (matrix[y][x] === 0) {
+                fill("#f2d491")
+            } else if (matrix[y][x] === 1) {
+                fill("green")
+            } else if (matrix[y][x] === 2) {
+                fill("yellow")
+            } else if (matrix[y][x] === 3) {
+                fill("red")
+            } else if (matrix[y][x] === 4) {
+                fill("white")
+            } else if (matrix[y][x] === 5) {
+                fill(r, g, b)
+            } else if (matrix[y][x] === 6) {
+                fill("turquoise")
+            } else {
+                fill("black")
             }
+            rect(x * (500 / matrix.length), y * (500 / matrix.length),
+                (500 / matrix.length), (500 / matrix.length))
         }
     }
-
 }
+
 
 window.onload = main();

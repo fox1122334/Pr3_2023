@@ -32,7 +32,7 @@ server.listen(3000, function () {
             console.log("Starte Spiel... wenn noch nicht gestartet...")
             initGame()
             //Spielschleife
-            interVaLID = setInterval(updateGame, 3000);
+            interVaLID = setInterval(updateGame, 2000);
             isGameRunning = true
         }
         //wenn Client verlässt
@@ -53,7 +53,7 @@ server.listen(3000, function () {
 
 
 ///////// game logic on server ////////
-matrix = [
+matrixKlein = [
     [0, 0, 1, 0, 0],
     [1, 1, 0, 0, 0],
     [0, 1, 0, 3, 0],
@@ -88,7 +88,6 @@ function addMoreCreatures() {
         }
     }
 }
-
 
 function initGame() {
     console.log('init game....');
@@ -127,7 +126,7 @@ function updateGame() {
         grazerObj.mul();
 
     }
-    //console.log(matrix);
+    // console.log(matrixKlein);
     console.log("sende matrix zu clients...");
     io.sockets.emit('matrix', matrix);
 }
