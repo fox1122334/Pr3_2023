@@ -1,6 +1,7 @@
 const Grass = require("./classes/grass.js");
 const Grazer = require("./classes/grazer.js");
 const Predator = require("./classes/predator.js");
+const Fire = require("./classes/fire.js")
 //const functions = require("./classes/functions.js");
 
 ///////// Server Setup ///////////
@@ -20,6 +21,9 @@ let clients = [];
 let isGameRunning = false;
 let interValID;
 
+let tickspeed = 200;
+
+
 server.listen(3000, function () {
     console.log("Der Server läuft auf port 3000...");
 
@@ -32,7 +36,7 @@ server.listen(3000, function () {
             console.log("Starte Spiel... wenn noch nicht gestartet...")
             initGame()
             //Spielschleife
-            interVaLID = setInterval(updateGame, 2000);
+            interVaLID = setInterval(updateGame, tickspeed);
             isGameRunning = true
         }
         //wenn Client verlässt
@@ -66,6 +70,7 @@ matrixKlein = [
 module.exports = grassArr = [];
 module.exports = grazerArr = [];
 module.exports = predatorArr = [];
+module.exports = fireArr = [];
 
 function getRandMatrix(cols, rows) {
     let matrix = [];
@@ -83,7 +88,7 @@ function addMoreCreatures() {
         for (let x = 0; x < matrix[y].length; x++) {
             if (y == x) {
                 if (y % 2 == 0) matrix[y][x] = 3;
-                else matrix[y][x] = 2;
+                //else matrix[y][x] = 2;
             }
         }
     }
@@ -106,6 +111,9 @@ function initGame() {
             } else if (matrix[y][x] == 3) {
                 let predatorObj = new Predator(x, y);
                 predatorArr.push(predatorObj);
+            } else if (matrix[y][x] == 4) {
+                let fireObj = new Fire(x, y);
+                fireArr.push(fireObj);
             }
         }
     }
@@ -124,6 +132,18 @@ function updateGame() {
         let grazerObj = grazerArr[i];
         grazerObj.eat();
         grazerObj.mul();
+
+    }
+    for (let i = 0; i < predatorArr.length; i++) {
+        let predatorObj = predatorArr[i];
+        predatorObj.move();
+        predatorObj.eat();
+        predatorObj.mul();
+
+    }
+    for (let i = 0; i < fireArr.length; i++) {
+        let fireObj = fireArr[i];
+        fireObj.mul();
 
     }
     // console.log(matrixKlein);

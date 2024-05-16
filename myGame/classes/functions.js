@@ -17,4 +17,5 @@ const removeFromList = (obj, list) => {
     }
 }
 
+
 module.exports = {removeFromList, findRandomPosFor}

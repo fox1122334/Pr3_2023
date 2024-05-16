@@ -14,7 +14,7 @@ function main() {
     }
     socket.on("matrix", gotMatrixData)
 
-    // button.onclick = setInterval(20000);
+    button.onclick = tickspeed
 }
 
 function setup() {
@@ -37,13 +37,13 @@ function zeichneMatrix() {
             } else if (matrix[y][x] === 2) {
                 fill("yellow")
             } else if (matrix[y][x] === 3) {
-                fill("red")
+                fill("purple")
             } else if (matrix[y][x] === 4) {
                 fill("white")
             } else if (matrix[y][x] === 5) {
                 fill(r, g, b)
             } else if (matrix[y][x] === 6) {
-                fill("turquoise")
+                fill("red")
             } else {
                 fill("black")
             }

@@ -1,3 +1,4 @@
+const utils = require("./functions.js");
 const LivingCreature = require("./livingCreature.js");
 module.exports = class Predator extends LivingCreature{
     constructor(x, y) {
@@ -38,7 +39,7 @@ module.exports = class Predator extends LivingCreature{
         if (fields.length > 0) {
             let pos = random(fields);
             this.updateGameAndPos(pos[0], pos[1]);
-            removeFromList(this, grazerArr); // Grasfresser löschen
+            utils.removeFromList(this, grazerArr); // Grasfresser löschen
 
             this.eatCount++;
             this.notEaten = 0;
@@ -46,6 +47,7 @@ module.exports = class Predator extends LivingCreature{
             this.mul();
 
         } else {
+            console.log("no food")
             this.notEaten++;
             this.eatCount = 0;
             if (this.notEaten >= 8) {
@@ -60,14 +62,16 @@ module.exports = class Predator extends LivingCreature{
     move() {
         let emptyFields = this.findFields(0);
         if (emptyFields.length > 0) {
-            let pos = random(emptyFields);
+            let randomIndex = Math.floor(Math.random() * emptyFields.length);
+            let pos = emptyFields[randomIndex];
             this.updateGameAndPos(pos[0], pos[1]);
         }
     }
 
     die() {
+        console.log("die")
         matrix[this.y][this.x] = 0;
-        removeFromList(this, predatorArr);
+        utils.removeFromList(this, predatorArr);
     }
 
     mul() {
