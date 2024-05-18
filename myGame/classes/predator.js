@@ -9,23 +9,23 @@ module.exports = class Predator extends LivingCreature{
         this.notEaten = 0;
     }
 
-    updateNeighbors() {
-        this.neighbors = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
+    // updateNeighbors() {
+    //     this.neighbors = [
+    //         [this.x - 1, this.y - 1],
+    //         [this.x, this.y - 1],
+    //         [this.x + 1, this.y - 1],
+    //         [this.x - 1, this.y],
+    //         [this.x + 1, this.y],
+    //         [this.x - 1, this.y + 1],
+    //         [this.x, this.y + 1],
+    //         [this.x + 1, this.y + 1]
+    //     ];
+    // }
 
-    findFields(symbol) {
-        this.updateNeighbors();
-        return super.findFields(symbol);
-    }
+    // findFields(symbol) {
+    //     this.updateNeighbors();
+    //     return super.findFields(symbol);
+    // }
 
     updateGameAndPos(newX, newY) {
         matrix[newY][newX] = this.colorValue;

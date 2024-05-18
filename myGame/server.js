@@ -21,7 +21,7 @@ let clients = [];
 let isGameRunning = false;
 let interValID;
 
-let tickspeed = 200;
+let tickspeed = 400;
 
 
 server.listen(3000, function () {
@@ -87,7 +87,7 @@ function addMoreCreatures() {
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix[y].length; x++) {
             if (y == x) {
-                if (y % 2 == 0) matrix[y][x] = 3;
+                if (y % 2 == 0) matrix[y][x] = 2;
                 //else matrix[y][x] = 2;
             }
         }
@@ -97,7 +97,8 @@ function addMoreCreatures() {
 function initGame() {
     console.log('init game....');
     matrix = getRandMatrix(50, 50);
-    addMoreCreatures();
+    //addMoreCreatures();
+    matrix[20][20] = 4;
 
     // durch Matrix laufen und Lebewesen erstellen
     for (let y = 0; y < matrix.length; y++) {

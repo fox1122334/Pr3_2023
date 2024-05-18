@@ -1,8 +1,8 @@
 const utils = require("./functions.js");
 const LivingCreature = require("./livingCreature.js");
-module.exports = class Grazer extends LivingCreature{
+module.exports = class Grazer extends LivingCreature {
     constructor(x, y) {
-        super(x,y)
+        super(x, y)
         // Farbe - yellow
         this.colorValue = 2;
         this.eatCount = 0;
@@ -44,22 +44,23 @@ module.exports = class Grazer extends LivingCreature{
 
             this.eatCount++;
             this.notEaten = 0;
-            this.mul();
+            //this.mul();
 
         } else {
             this.notEaten++;
             this.eatCount = 0;
-            if (this.notEaten >= 5) {
+            if (this.notEaten >= 1) {
                 this.die();
             } else {
-                this.move();
-                this.mul();
+                console
+                // this.move();
+                // this.mul();
             }
         }
     }
 
     move() {
-        let emptyFields = this.findFields(0);
+        let emptyFields = this.findFields(1);
         if (emptyFields.length > 0) {
             let randomIndex = Math.floor(Math.random() * emptyFields.length);
             let pos = emptyFields[randomIndex];
