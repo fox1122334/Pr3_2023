@@ -49,7 +49,7 @@ module.exports = class Grazer extends LivingCreature {
         } else {
             this.notEaten++;
             this.eatCount = 0;
-            if (this.notEaten >= 1) {
+            if (this.notEaten >= 3) {
                 this.die();
             } else {
                 console
@@ -59,14 +59,14 @@ module.exports = class Grazer extends LivingCreature {
         }
     }
 
-    move() {
-        let emptyFields = this.findFields(1);
-        if (emptyFields.length > 0) {
-            let randomIndex = Math.floor(Math.random() * emptyFields.length);
-            let pos = emptyFields[randomIndex];
-            this.updateGameAndPos(pos[0], pos[1]);
-        }
-    }
+    // move() {
+    //     let emptyFields = this.findFields(1);
+    //     if (emptyFields.length > 0) {
+    //         let randomIndex = Math.floor(Math.random() * emptyFields.length);
+    //         let pos = emptyFields[randomIndex];
+    //         this.updateGameAndPos(pos[0], pos[1]);
+    //     }
+    // }
 
     die() {
         matrix[this.y][this.x] = 0;

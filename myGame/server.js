@@ -21,7 +21,7 @@ let clients = [];
 let isGameRunning = false;
 let interValID;
 
-let tickspeed = 400;
+let tickspeed = 100;
 
 
 server.listen(3000, function () {
@@ -97,8 +97,9 @@ function addMoreCreatures() {
 function initGame() {
     console.log('init game....');
     matrix = getRandMatrix(50, 50);
-    //addMoreCreatures();
-    matrix[20][20] = 4;
+    // addMoreCreatures();
+    matrix[20][20] = 3;
+    matrix[25][25] = 2;
 
     // durch Matrix laufen und Lebewesen erstellen
     for (let y = 0; y < matrix.length; y++) {
@@ -144,10 +145,34 @@ function updateGame() {
     }
     for (let i = 0; i < fireArr.length; i++) {
         let fireObj = fireArr[i];
-        fireObj.mul();
+        fireObj.spread();
+        //fireObj.extinguish();
 
     }
     // console.log(matrixKlein);
     console.log("sende matrix zu clients...");
     io.sockets.emit('matrix', matrix);
+
+    if (grassArr.length < 8) {
+        for (let i = 0; i < grassArr.length; i++){
+            let grassObj = grassArr[i]
+            grassObj.mul()
+        }
+    }
+
+    if (grazerArr.length < 8) {
+        for (let i = 0; i < grazerArr.length; i++){
+            let grazerObj = grazerArr[i]
+            grazerObj.mul()
+        }
+    }
+
+    if (predatorArr.length < 8) {
+        for (let i = 0; i < predatorArr.length; i++){
+            let predatorObj = predatorArr[i]
+            predatorObj.mul()
+        }
+    }
+
+
 }

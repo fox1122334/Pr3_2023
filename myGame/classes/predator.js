@@ -1,31 +1,31 @@
 const utils = require("./functions.js");
 const LivingCreature = require("./livingCreature.js");
-module.exports = class Predator extends LivingCreature{
+module.exports = class Predator extends LivingCreature {
     constructor(x, y) {
-        super(x,y);
+        super(x, y);
         // Farbe - red
         this.colorValue = 3;
         this.eatCount = 0;
         this.notEaten = 0;
     }
 
-    // updateNeighbors() {
-    //     this.neighbors = [
-    //         [this.x - 1, this.y - 1],
-    //         [this.x, this.y - 1],
-    //         [this.x + 1, this.y - 1],
-    //         [this.x - 1, this.y],
-    //         [this.x + 1, this.y],
-    //         [this.x - 1, this.y + 1],
-    //         [this.x, this.y + 1],
-    //         [this.x + 1, this.y + 1]
-    //     ];
-    // }
+    updateNeighbors() {
+        this.neighbors = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
+    }
 
-    // findFields(symbol) {
-    //     this.updateNeighbors();
-    //     return super.findFields(symbol);
-    // }
+    findFields(symbol) {
+        this.updateNeighbors();
+        return super.findFields(symbol);
+    }
 
     updateGameAndPos(newX, newY) {
         matrix[newY][newX] = this.colorValue;
@@ -37,7 +37,8 @@ module.exports = class Predator extends LivingCreature{
     eat() {
         let fields = this.findFields(2);
         if (fields.length > 0) {
-            let pos = random(fields);
+            let randomIndex = Math.floor(Math.random() * fields.length);
+            let pos = fields[randomIndex];
             this.updateGameAndPos(pos[0], pos[1]);
             utils.removeFromList(this, grazerArr); // Grasfresser löschen
 
@@ -50,7 +51,7 @@ module.exports = class Predator extends LivingCreature{
             console.log("no food")
             this.notEaten++;
             this.eatCount = 0;
-            if (this.notEaten >= 8) {
+            if (this.notEaten >= 12) {
                 this.die();
             } else {
                 this.move();
@@ -78,8 +79,8 @@ module.exports = class Predator extends LivingCreature{
         if (this.eatCount >= 5) {
             let emptyFields = this.findFields(0);
             if (emptyFields.length > 0) {
-                let pos = random(emptyFields);
-
+                let randomIndex = Math.floor(Math.random() * emptyFields.length);
+                let pos = emptyFields[randomIndex];
                 predatorArr.push(new Predator(pos[0], pos[1]));
                 matrix[pos[1]][pos[0]] = this.colorValue;
             }
