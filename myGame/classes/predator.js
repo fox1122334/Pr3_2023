@@ -51,7 +51,7 @@ module.exports = class Predator extends LivingCreature {
             console.log("no food")
             this.notEaten++;
             this.eatCount = 0;
-            if (this.notEaten >= 12) {
+            if (this.notEaten >= 18) {
                 this.die();
             } else {
                 this.move();

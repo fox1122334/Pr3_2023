@@ -1,3 +1,4 @@
+const utils = require("./classes/functions.js");
 const Grass = require("./classes/grass.js");
 const Grazer = require("./classes/grazer.js");
 const Predator = require("./classes/predator.js");
@@ -21,7 +22,7 @@ let clients = [];
 let isGameRunning = false;
 let interValID;
 
-let tickspeed = 100;
+let tickspeed = 1000;
 
 
 server.listen(3000, function () {
@@ -97,9 +98,14 @@ function addMoreCreatures() {
 function initGame() {
     console.log('init game....');
     matrix = getRandMatrix(50, 50);
+    grassArr = []
+    grazerArr = []
+    predatorArr = []
+    fireArr = []
+
     // addMoreCreatures();
-    matrix[20][20] = 3;
-    matrix[25][25] = 2;
+    matrix[20][20] = 4;
+    //matrix[25][25] = 2;
 
     // durch Matrix laufen und Lebewesen erstellen
     for (let y = 0; y < matrix.length; y++) {
@@ -119,10 +125,9 @@ function initGame() {
             }
         }
     }
-    console.log("Sende matrix zu clients")
-    io.sockets.emit('matrix', matrix);
+    //     console.log("Sende matrix zu clients")
+    //     io.sockets.emit('matrix', matrix);
 }
-
 function updateGame() {
     console.log("update game...");
     for (let i = 0; i < grassArr.length; i++) {
@@ -147,32 +152,33 @@ function updateGame() {
         let fireObj = fireArr[i];
         fireObj.spread();
         //fireObj.extinguish();
-
     }
-    // console.log(matrixKlein);
-    console.log("sende matrix zu clients...");
-    io.sockets.emit('matrix', matrix);
 
     if (grassArr.length < 8) {
-        for (let i = 0; i < grassArr.length; i++){
+        for (let i = 0; i < grassArr.length; i++) {
             let grassObj = grassArr[i]
             grassObj.mul()
         }
     }
 
-    if (grazerArr.length < 8) {
-        for (let i = 0; i < grazerArr.length; i++){
+    if (grazerArr.length < 6) {
+        console.log("nur noch 6 grazer")
+        for (let i = 0; i < grazerArr.length; i++) {
+            console.log("grazer multiply")
             let grazerObj = grazerArr[i]
             grazerObj.mul()
         }
     }
 
     if (predatorArr.length < 8) {
-        for (let i = 0; i < predatorArr.length; i++){
+        for (let i = 0; i < predatorArr.length; i++) {
             let predatorObj = predatorArr[i]
             predatorObj.mul()
+
         }
     }
 
-
+    // console.log(matrixKlein);
+    console.log("sende matrix zu clients...");
+    io.sockets.emit('matrix', matrix);
 }

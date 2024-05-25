@@ -14,8 +14,15 @@ function main() {
     }
     socket.on("matrix", gotMatrixData)
 
-    // button.onclick = tickspeed
+    button.onclick = lightning()
+
+    // lightning() {
+    //     console.log ("lightning")
+    // }
+       
+    
 }
+
 
 function setup() {
     createCanvas(500, 500);
@@ -23,7 +30,7 @@ function setup() {
 
 // Matrix zeichnen
 function zeichneMatrix() {
-    console.log ("matrix zeichnen")
+    console.log("matrix zeichnen")
     for (let y = 0; y < matrix.length; y++) {
         for (let x = 0; x < matrix.length; x++) {
             // console.log(matrix[y][x])

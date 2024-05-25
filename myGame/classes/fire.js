@@ -8,49 +8,25 @@ module.exports = class Fire extends LivingCreature {
         this.roundCount = 0;
         this.notSpread = 0;
     }
-    // spread() {
-    //     // counter > 3 , dann vermehren
-    //     this.roundCount++;
-    //     console.log("hi")
-    //     if (this.roundCount >= 3) {
-    //         console.log("spread")
-    //         let emptyFields = this.findFields(1);
-    //         if (emptyFields.length > 0) {
-    //             let randomIndex = Math.floor(Math.random() * emptyFields.length);
-    //             let newPos = emptyFields[randomIndex]; // [x,y]
-    //             this.updateGameAndPos(newPos[0], newPos[1]);
-    //             utils.removeFromList(this, grassArr); // Gras löschen
-    //             // let newX = newPos[0];
-    //             // let newY = newPos[1];
-    //             // fireArr.push(new Fire(newX, newY));
-    //             // matrix[newY][newX] = this.colorValue;
-    //         }
-    //         this.roundCount = 0;
-    //     }
-    //     else {
-    //         this.notSpread++;
-    //         if (this.notSpread >= 20) {
-    //             this.extinguish()
-    //             console.log("dieeeee")
-    //         }
-
-    //     }
-    // }
+ 
     spread() {
         this.roundCount++;
-        console.log("hi")
-        if (this.roundCount >= 3) {
+        console.log("fire")
+        if (this.roundCount >= 2) {
             console.log("spread")
             let pos = utils.findRandomPosFor(this, 1);
             if (pos !== undefined) {
                 fireArr.push(new Fire(pos[0], pos[1]));
                 matrix[pos[1]][pos[0]] = this.colorValue;
+                this.x = pos[0]
+                this.y = pos[1]
+                utils.removeFromList(this, grassArr);
             }
             this.roundCount = 0;
         }
         else {
             this.notSpread++;
-            if (this.notSpread >= 20) {
+            if (this.notSpread >= 5) {
                 this.extinguish()
                 console.log("dieeeee")
             }
@@ -84,4 +60,11 @@ module.exports = class Fire extends LivingCreature {
         matrix[this.y][this.x] = 0;
         utils.removeFromList(this, fireArr);
     }
+
+
+    lightning(){
+    
+    }
+    
+
 }
