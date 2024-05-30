@@ -83,4 +83,12 @@ module.exports = class Grazer extends LivingCreature {
             this.eatCount = 0;
         }
     }
+    mulnow() {
+        let pos = utils.findRandomPosFor(this, 0);
+        if (pos !== undefined) {
+            grazerArr.push(new Grazer(pos[0], pos[1]));
+            matrix[pos[1]][pos[0]] = this.colorValue;
+        }
+
+    }
 }

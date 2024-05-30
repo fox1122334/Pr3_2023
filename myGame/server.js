@@ -3,7 +3,6 @@ const Grass = require("./classes/grass.js");
 const Grazer = require("./classes/grazer.js");
 const Predator = require("./classes/predator.js");
 const Fire = require("./classes/fire.js")
-//const functions = require("./classes/functions.js");
 
 ///////// Server Setup ///////////
 const express = require("express");
@@ -22,7 +21,7 @@ let clients = [];
 let isGameRunning = false;
 let interValID;
 
-let tickspeed = 1000;
+let tickspeed = 100;
 
 
 server.listen(3000, function () {
@@ -53,6 +52,19 @@ server.listen(3000, function () {
                 console.log("Spiel gestopt: keine Clients", clients.length)
             }
         })
+
+        socket.on("lightning", function () {
+            console.log("lightning")
+
+            let thisx = [Math.floor(Math.random() * matrix.length)]
+            let thisy = [Math.floor(Math.random() * matrix.length)]
+            // matrix[thisx][thisy] = 4;
+            fireArr.push(new Fire(thisx, thisy));
+
+            // let randomIndex = Math.floor(Math.random() * fields.length);
+            // return fields[randomIndex];
+        })
+
     })
 });
 
@@ -89,7 +101,7 @@ function addMoreCreatures() {
         for (let x = 0; x < matrix[y].length; x++) {
             if (y == x) {
                 if (y % 2 == 0) matrix[y][x] = 2;
-                //else matrix[y][x] = 2;
+                else matrix[y][x] = 3;
             }
         }
     }
@@ -103,9 +115,9 @@ function initGame() {
     predatorArr = []
     fireArr = []
 
-    // addMoreCreatures();
-    matrix[20][20] = 4;
-    //matrix[25][25] = 2;
+    addMoreCreatures();
+    // matrix[20][20] = 4;
+    // matrix[25][25] = 2;
 
     // durch Matrix laufen und Lebewesen erstellen
     for (let y = 0; y < matrix.length; y++) {
@@ -154,10 +166,11 @@ function updateGame() {
         //fireObj.extinguish();
     }
 
-    if (grassArr.length < 8) {
+    if (grassArr.length < 6) {
         for (let i = 0; i < grassArr.length; i++) {
+            console.log("grass multiply")
             let grassObj = grassArr[i]
-            grassObj.mul()
+            grassObj.mulnow()
         }
     }
 
@@ -166,14 +179,15 @@ function updateGame() {
         for (let i = 0; i < grazerArr.length; i++) {
             console.log("grazer multiply")
             let grazerObj = grazerArr[i]
-            grazerObj.mul()
+            grazerObj.mulnow()
         }
     }
 
-    if (predatorArr.length < 8) {
+    if (predatorArr.length < 3) {
         for (let i = 0; i < predatorArr.length; i++) {
+            console.log("predator multiply")
             let predatorObj = predatorArr[i]
-            predatorObj.mul()
+            predatorObj.mulnow()
 
         }
     }

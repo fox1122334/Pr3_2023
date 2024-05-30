@@ -1,8 +1,8 @@
+const socket = io();
 let matrix = [];
 
 
 function main() {
-    const socket = io();
 
     let button = document.getElementById("button");
     console.log("ready to display game ...")
@@ -13,14 +13,12 @@ function main() {
         matrix = data;
     }
     socket.on("matrix", gotMatrixData)
-
-    button.onclick = lightning()
-
-    // lightning() {
-    //     console.log ("lightning")
-    // }
        
-    
+}
+
+function myFunction(){
+    // console.log("test button")
+    socket.emit("lightning")
 }
 
 

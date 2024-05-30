@@ -1,7 +1,8 @@
+const utils = require("./functions.js");
 const LivingCreature = require("./livingCreature.js");
-module.exports = class Grass extends LivingCreature{
+module.exports = class Grass extends LivingCreature {
     constructor(x, y) {
-        super(x,y);
+        super(x, y);
         // Farbe - grün
         this.colorValue = 1;
         this.roundCount = 0;
@@ -20,6 +21,13 @@ module.exports = class Grass extends LivingCreature{
                 matrix[newY][newX] = this.colorValue;
             }
             this.roundCount = 0;
+        }
+    }
+    mulnow() {
+        let pos = utils.findRandomPosFor(this, 0);
+        if (pos !== undefined) {
+            grassArr.push(new Grass(pos[0], pos[1]));
+            matrix[pos[1]][pos[0]] = this.colorValue;
         }
     }
 }

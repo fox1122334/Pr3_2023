@@ -12,7 +12,7 @@ module.exports = class Fire extends LivingCreature {
     spread() {
         this.roundCount++;
         console.log("fire")
-        if (this.roundCount >= 2) {
+        if (this.roundCount >= 5) {
             console.log("spread")
             let pos = utils.findRandomPosFor(this, 1);
             if (pos !== undefined) {
@@ -26,33 +26,13 @@ module.exports = class Fire extends LivingCreature {
         }
         else {
             this.notSpread++;
-            if (this.notSpread >= 5) {
+            if (this.notSpread >= 6) {
                 this.extinguish()
                 console.log("dieeeee")
             }
 
         }
     }
-    // eat() {
-    //     let fields = this.findFields(1);
-    //     if (fields.length > 0) {
-    //         let randomIndex = Math.floor(Math.random() * fields.length);
-    //         let pos = fields[randomIndex];
-    //         this.updateGameAndPos(pos[0], pos[1]);
-    //         utils.removeFromList(this, grassArr); // Gras löschen
-
-    //         this.eatCount++;
-    //         this.notEaten = 0;
-    //         //this.mul();
-
-    //     } else {
-    //         this.notSpread++;
-    //         if (this.notSpread >= 10) {
-    //             this.extinguish()
-    //             console.log("dieeeee")
-    //         }
-    //     }
-    // }
 
 
     extinguish() {

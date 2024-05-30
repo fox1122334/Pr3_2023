@@ -1,3 +1,5 @@
+const LivingCreature = require("./livingCreature.js");
+
 const findRandomPosFor = (obj, symbol) => {
     let fields = obj.findFields(symbol);
     if(fields.length > 0){
@@ -16,6 +18,8 @@ const removeFromList = (obj, list) => {
         }  
     }
 }
+
+
 
 
 module.exports = {removeFromList, findRandomPosFor}
